@@ -125,10 +125,22 @@ doc2 = readDocx(sys.argv[2])
 
 print('开始比对...'.center(80, '*'))
 t1 = datetime.datetime.now()
-for i in range(len(doc1)):
-    if i % 100 == 0:
-        print('处理进行中，已处理段落 {0:>4d} (总数 {1:0>4d} ） '.format(i, len(doc1)))
-    for j in range(len(doc2)):
-        compareParagraph(doc1, i, doc2, j)
+if (len(doc1) > len(doc2)):
+    for i in range(len(doc1)):
+        if i % 100 == 0:
+            print('处理进行中，已处理段落 {0:>4d} (总数 {1:0>4d} ） '.format(i, len(doc1)))
+        for j in range(len(doc2)):
+            compareParagraph(doc1, i, doc2, j)
+else:
+    for i in range(len(doc2)):
+        if i % 100 == 0:
+            print('处理进行中，已处理段落 {0:>4d} (总数 {1:0>4d} ） '.format(i, len(doc2)))
+        for j in range(len(doc1)):
+            compareParagraph(doc2, i, doc1, j)
+# for i in range(len(doc1)):
+#     if i % 100 == 0:
+#         print('处理进行中，已处理段落 {0:>4d} (总数 {1:0>4d} ） '.format(i, len(doc1)))
+#     for j in range(len(doc2)):
+#         compareParagraph(doc1, i, doc2, j)
 t2 = datetime.datetime.now()
 print('\n比对完成，总用时: ', t2 - t1)
