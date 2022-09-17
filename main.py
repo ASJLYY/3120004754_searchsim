@@ -7,7 +7,8 @@ import re, sys, datetime
 
 
 def getText(d):
-    with open(d, 'r') as f:
+    # currentFile = open(d, encoding='utf-8')
+    with open(d, 'r', encoding='utf-8') as f:
         txt = f.read()
     print("原文为：", txt)
     texts = []
@@ -100,6 +101,7 @@ def compareParagraph(text1, i, text2, j, min_segment=5):
 
 if len(sys.argv) < 3:
     print("参数小于2.")
+
 
 doc1 = readDocx(sys.argv[1])
 doc2 = readDocx(sys.argv[2])
