@@ -110,7 +110,7 @@ doc2 = readDocx(sys.argv[2])
 
 # file_d1 = open(doc1, "r")
 
-# print(file.read())  # 打印文件内容
+# print(file.read())
 # print(file_d1.read())
 # text1 = file_d1.read()
 # doc2 = os.open('D:/360MoveData/Users/Administrator/Desktop/2.txt', os.O_RDONLY)
