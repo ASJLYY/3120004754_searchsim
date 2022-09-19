@@ -12,7 +12,7 @@ def getText(d):
     # currentFile = open(d, encoding='utf-8')
     with open(d, 'r', encoding='utf-8') as f:
         txt = f.read()
-    print("原文为：", txt)
+    # print("原文为：", txt)
     texts = []
     texts.append(txt)
     return texts
@@ -40,7 +40,7 @@ def readDocx(txtfile):
         temp = []
         for s in msplit(p):
             if len(s) > 2:
-                temp.append(s.replace(' ', ""))
+                temp.append(s)
         if len(temp) > 0:
             segs.append(temp)
     t2 = datetime.datetime.now()
