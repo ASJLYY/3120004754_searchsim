@@ -1,6 +1,6 @@
-from collections import defaultdict
-import os
+import fileinput
 import re, sys, datetime
+
 
 """
 文本查重
@@ -69,7 +69,7 @@ def compareParagraph(text1, i, text2, j, min_segment=5):
     :param p2: 列
     :param min_segment = 5: 最小段的长度
     """
-    p1 = text1[j]
+    p1 = text1[i]
     p2 = text2[j]
     len1 = sum([len(s) for s in p1])
     len2 = sum([len(s) for s in p2])
@@ -91,13 +91,18 @@ def compareParagraph(text1, i, text2, j, min_segment=5):
     # 取两个字符串的最短的一个进行比值计算
     count = sum([len(s) for s in list])
     ratio = float(count) / min(len1, len2)
-    if count > 10 and ratio > 0.1:
+    if count > 5 and ratio > 0.1:
         print(' 发现相同内容 '.center(80, '*'))
-        print('文件1第{0:0>4d}段内容：{1}'.format(i + 1, p1))
-        print('文件2第{0:0>4d}段内容：{1}'.format(j + 1, p2))
-        print('相同内容：', list)
+        # print('文件1第{0:0>4d}段内容：{1}'.format(i + 1, p1))
+        # print('文件2第{0:0>4d}段内容：{1}'.format(j + 1, p2))
+        print("相同字符已拷贝至D:\\360MoveData\\Users\\Administrator\\Desktop\\sim.txt")
+        desktop_path = "D:\\360MoveData\\Users\\Administrator\\Desktop\\"  # 新创建的txt文件的存放路径
+        full_path = desktop_path + 'sim' + '.txt'  # 也可以创建一个.doc的word文档
+        file = open(full_path, 'w', encoding='utf-8')
+        for item in list:
+            file.write(item)
+        # print('相同内容：', list)
         print('相同字符比：{1:.2f}%\n相同字符数： {0}\n'.format(count, ratio * 100))
-    return list
 
 
 
@@ -106,6 +111,7 @@ if len(sys.argv) < 3:
 
 
 doc1 = readDocx(sys.argv[1])
+# print("原文是：", doc1)
 doc2 = readDocx(sys.argv[2])
 
 # a = os.open("data.txt", os.O_RDONLY)  # 打开文件，并获取其文件描述符
@@ -148,3 +154,4 @@ else:
 #         compareParagraph(doc1, i, doc2, j)
 t2 = datetime.datetime.now()
 print('\n比对完成，总用时: ', t2 - t1)
+
